@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.30",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "canvas": "^2.10.2",
     "ethers": "^5.7.2",
+    "html-to-image": "^1.11.1",
+    "mime": "^3.0.0",
+    "nft.storage": "^7.0.0",
+    "node-html-to-image": "^3.2.4",
     "qrcode": "^1.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -15,7 +21,7 @@
     "web3": "^1.5.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
