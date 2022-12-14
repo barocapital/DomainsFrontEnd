@@ -16,3 +16,26 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+
+input {
+  border: 3px solid #000c11;
+}
+input:invalid {
+  border-color: #dd2c00;
+}
+
+#notify {
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 12px;
+  width: 100%;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#notify.error {
+  background-color: #dd2c00;
+}
