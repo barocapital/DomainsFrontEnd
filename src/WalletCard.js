@@ -76663,8 +76663,6 @@ const WalletCard = () => {
             "ipfs://",
             "https://nftstorage.link/ipfs/"
           );
-          console.log("-----");
-          console.log(imageDentro);
         })
         .catch((err) => console.error(err));
       setVisibleItem(true);
@@ -76708,8 +76706,6 @@ const WalletCard = () => {
 
   const connectWalletHandler = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
-      console.log("MetaMask Here!");
-
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
@@ -76723,7 +76719,6 @@ const WalletCard = () => {
           setErrorMessage(error.message);
         });
     } else {
-      console.log("Need to install MetaMask");
       setErrorMessage("Please install MetaMask browser extension to interact");
     }
   };
