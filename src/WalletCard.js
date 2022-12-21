@@ -20,8 +20,7 @@
    const [connButtonText, setConnButtonText] = useState("Connect Wallet");
  
    async function mint() {
-
-  /*-----*/
+     //Restrict to 25 characters
      let imageDentro;
      let canvasBackground= background(userDomin);
      console.log(canvasBackground);
