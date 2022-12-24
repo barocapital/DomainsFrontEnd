@@ -4,9 +4,12 @@
  import { NFTStorage } from "nft.storage/dist/bundle.esm.min.js";
  import QRCode from "qrcode";
  import {background} from "./methods/functions.js"
+ import ABI from "./methods/ABI.json"
+ import { usePrepareContractWrite, useContractWrite } from 'wagmi'
  var connected = false;
  
  const WalletCard = () => {
+
    const client = new NFTStorage({
      token: process.env.REACT_APP_NFTSTORAGE_TOKEN,
    });
@@ -20,7 +23,7 @@
    const [connButtonText, setConnButtonText] = useState("Connect Wallet");
  
    async function mint() {
-     //Restrict to 25 characters
+     //Restrict to 25 characters + .baro
      let imageDentro;
      let canvasBackground= background(userDomin);
      console.log(canvasBackground);
@@ -36,6 +39,7 @@
            }
          ),
        });
+       console.log(metadata);
        alert("Procesando dominio,espere un momento...");
        await fetch(
          metadata.url.replace("ipfs://", "https://nftstorage.link/ipfs/")
@@ -50,9 +54,27 @@
          .catch((err) => console.error(err));
        setVisibleItem(true);
        setImagex(imageDentro);
+       console.log("image");
+       write?.()
+       console.log("imagex");
+    
      });
    }
- 
+   const { config } = usePrepareContractWrite({
+    address: '0xF9FB1B27314Fa5bA136C765bE2439C9513aEf13C',
+    abi: ABI,
+    functionName: 'register',
+    args: [userDomin.replace(".baro", ""), imagex.replace("https://nftstorage.link/ipfs/", "ipfs://")],
+    enabled: Boolean(imagex),
+    onSuccess(data) {
+      console.log('Success', data)
+    },
+    onError(error) {
+      console.log('Error', error)
+    },
+  })
+  const { write } = useContractWrite(config)
+
    const canvasRef = useRef(null);
  
    useEffect(() => {
@@ -67,7 +89,6 @@
  
    const domainbaro = () => {
      let strongRegex = new RegExp("^[A-Za-z0-9_-]*$");
- 
      if (window.ethereum && window.ethereum.isMetaMask) {
        window.ethereum
          .request({ method: "eth_requestAccounts" })
