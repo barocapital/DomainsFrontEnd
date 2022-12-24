@@ -6,6 +6,7 @@
  import {background} from "./methods/functions.js"
  import ABI from "./methods/ABI.json"
  import { usePrepareContractWrite, useContractWrite } from 'wagmi'
+
  var connected = false;
  
  const WalletCard = () => {
@@ -13,6 +14,9 @@
    const client = new NFTStorage({
      token: process.env.REACT_APP_NFTSTORAGE_TOKEN,
    });
+
+   const [action, setActions] = useState(false);
+   const [metadataX, setMetaDatax] = useState("");
    const [imagex, setImagex] = useState("");
    const [visibleItem, setVisibleItem] = useState(false);
    const [errorMessage, setErrorMessage] = useState(null);
@@ -23,10 +27,10 @@
    const [connButtonText, setConnButtonText] = useState("Connect Wallet");
  
    async function mint() {
-     //Restrict to 25 characters + .baro
+     setActions(true);
      let imageDentro;
      let canvasBackground= background(userDomin);
-     console.log(canvasBackground);
+
      canvasBackground.toBlob(async function (blob) {
        const metadata = await client.store({
          name: "Baro Name Service",
@@ -39,7 +43,7 @@
            }
          ),
        });
-       console.log(metadata);
+
        alert("Procesando dominio,espere un momento...");
        await fetch(
          metadata.url.replace("ipfs://", "https://nftstorage.link/ipfs/")
@@ -53,10 +57,10 @@
          })
          .catch((err) => console.error(err));
        setVisibleItem(true);
-       setImagex(imageDentro);
-       console.log("image");
+       setMetaDatax(metadata.url);
+       setActions(false);
        write?.()
-       console.log("imagex");
+
     
      });
    }
@@ -64,8 +68,8 @@
     address: '0xF9FB1B27314Fa5bA136C765bE2439C9513aEf13C',
     abi: ABI,
     functionName: 'register',
-    args: [userDomin.replace(".baro", ""), imagex.replace("https://nftstorage.link/ipfs/", "ipfs://")],
-    enabled: Boolean(imagex),
+    args: [userDomin.replace(".baro", ""), metadataX],
+    enabled: Boolean(action),
     onSuccess(data) {
       console.log('Success', data)
     },
@@ -73,9 +77,9 @@
       console.log('Error', error)
     },
   })
-  const { write } = useContractWrite(config)
 
-   const canvasRef = useRef(null);
+  const { write } = useContractWrite(config)
+  const canvasRef = useRef(null);
  
    useEffect(() => {
      QRCode.toCanvas(
