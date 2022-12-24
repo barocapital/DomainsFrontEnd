@@ -15,7 +15,7 @@
      token: process.env.REACT_APP_NFTSTORAGE_TOKEN,
    });
 
-   const [action, setActions] = useState(false);
+   const [action, setAction] = useState(false);
    const [metadataX, setMetaDatax] = useState("");
    const [imagex, setImagex] = useState("");
    const [visibleItem, setVisibleItem] = useState(false);
@@ -27,7 +27,7 @@
    const [connButtonText, setConnButtonText] = useState("Connect Wallet");
  
    async function mint() {
-     setActions(true);
+    setMetaDatax("");
      let imageDentro;
      let canvasBackground= background(userDomin);
 
@@ -57,10 +57,9 @@
          })
          .catch((err) => console.error(err));
        setVisibleItem(true);
+       console.log(metadata.url);
        setMetaDatax(metadata.url);
-       setActions(false);
        write?.()
-
     
      });
    }
@@ -69,7 +68,7 @@
     abi: ABI,
     functionName: 'register',
     args: [userDomin.replace(".baro", ""), metadataX],
-    enabled: Boolean(action),
+    enabled: Boolean(metadataX),
     onSuccess(data) {
       console.log('Success', data)
     },
