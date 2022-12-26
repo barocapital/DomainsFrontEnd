@@ -5,7 +5,7 @@ import {Profile} from "./Profile";
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { publicProvider } from 'wagmi/providers/public'
-import { Provider,createClient,configureChains } from 'wagmi'
+import { Provider,createClient,configureChains,useAccount, useConnect, useDisconnect } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { Chain } from 'wagmi'
 import { useNetwork } from 'wagmi'
@@ -32,28 +32,32 @@ const client = createClient({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: 'Injected',
-        shimDisconnect: true,
-      },
-    }),
   ],
   provider:provider
 })
 
-
-function App() {
-  return (
-    <div className="App">
-     <WagmiConfig client={client}>
-      <Profile/>
-      <WalletCard/>
-    </WagmiConfig>
-
-    </div>
-  );
+ 
+export function App() {
+  const { address, connector, isConnected } = useAccount()
+  return(
+    <center>
+    <WagmiConfig client={client}>
+        <Profile/>
+          { 
+            isConnected==true?
+            <>
+              <WalletCard/>
+            </>:
+            <>
+            </>
+          }
+        
+      </WagmiConfig>
+    </center>
+  )
+   
 }
+
+
 
 export default App;

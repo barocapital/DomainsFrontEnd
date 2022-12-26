@@ -6,21 +6,6 @@ import {
   } from 'wagmi'
 
 export function Profile() {
-    const { config } = usePrepareContractWrite({
-        address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-        abi: [
-          {
-            name: 'mint',
-            type: 'function',
-            stateMutability: 'nonpayable',
-            inputs: [{ internalType: 'uint32', name: 'tokenId', type: 'uint32' }],
-            outputs: [],
-          },
-        ],
-        functionName: 'mint',
-        args: [parseInt(0)],
-        enabled: Boolean(0),
-      })
   const { address, connector, isConnected } = useAccount()
   const { connect, connectors, error, isLoading, pendingConnector } =useConnect()
   const { disconnect } = useDisconnect()
