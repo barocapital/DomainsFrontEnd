@@ -1,0 +1,10 @@
+.divButton2 {
+  text-align: right;
+  flex: 100;
+}
+
+.my-label {
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+}

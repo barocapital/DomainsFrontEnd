@@ -1,9 +1,3 @@
-.walletCard {
-  margin: 1rem;
-  border: 1px solid rgb(233, 230, 230);
-  border-radius: 5px;
-}
-
 .buttonWallet {
   background-color: #4caf50;
   border: none;
@@ -17,10 +11,10 @@
   cursor: pointer;
 }
 
-input {
+Input {
   border: 3px solid #000c11;
 }
-input:invalid {
+Input:invalid {
   border-color: #dd2c00;
 }
 
