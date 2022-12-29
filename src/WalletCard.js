@@ -158,11 +158,11 @@ const WalletCard = ({ value }) => {
         if (!strongRegex.test(userDomin)) {
           alert("Caracter invalido");
         } else {
-          if (userDomin.length <= 25) {
+          if (userDomin.length <= 20) {
             setEnableProcess(0);
             mint();
           } else {
-            alert("No puede ser mas de 25 caracteres");
+            alert("No puede ser mas de 20 caracteres");
           }
         }
       }
@@ -225,7 +225,7 @@ const WalletCard = ({ value }) => {
                 <OutlinedInput
                   margin="dense"
                   type="text"
-                  pattern="[a-zA-Z0-9_-]{1,25}"
+                  pattern="[a-zA-Z0-9_-]{1,20}"
                   value={userDomin}
                   placeholder="domain"
                   onChange={(e) => setUserDomin(e.target.value)}
