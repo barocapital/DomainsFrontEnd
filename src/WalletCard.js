@@ -53,8 +53,8 @@ const WalletCard = ({ value }) => {
         image: new File(
           [blob],
           userDomin +
-            process.env.REACT_APP_TLD.toString().replace(".", "") +
-            ".jpg",
+          process.env.REACT_APP_TLD.toString().replace(".", "") +
+          ".jpg",
           {
             type: "image/jpg",
           }
@@ -153,15 +153,20 @@ const WalletCard = ({ value }) => {
         });
 
       if (userDomin.length === 0) {
-        alert("Caja de texto vacia");
+        alert("El nombre del dominio no puede quedar vacío.");
       } else {
         if (!strongRegex.test(userDomin)) {
-          alert("Caracter invalido");
+          alert("El nombre del dominio contiene caracteres no válidos. Utilice sólo Letras y Números.");
         } else {
           if (userDomin.length <= 20) {
-            setEnableProcess(0);
-            mint();
-          } else {
+            if ((/[a-zA-Z]/g).test(userDomin)) {
+              setEnableProcess(0);
+              mint();
+            }
+            else
+              alert("El nombre del dominio debe contener al menos una letra.");
+          }
+          else {
             alert("No puede ser mas de 20 caracteres");
           }
         }
