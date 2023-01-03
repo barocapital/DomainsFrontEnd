@@ -33,7 +33,7 @@ export const polygonTestnet: Chain = {
     default: process.env.REACT_APP_RPC_QUICKNODE_MUMBAI_TESTNET,
   },
   blockExplorers: {
-    default: { name: "PolygonScan", url: "https://polygonscan.com/" },
+    default: { name: "PolygonScan", url: "https://mumbai.polygonscan.com/" },
   },
   testnet: true,
 };

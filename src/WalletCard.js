@@ -267,7 +267,11 @@ const WalletCard = ({ value }) => {
               <div>
                 ¡Has obtenido con éxito tu NFT!
                 <div>
-                  <a href={`${data?.hash}`}>Hash</a>
+                 {
+
+                  data?.hash &&(
+                  <React.Fragment> <br></br><a target="_blank" href={`${polygonTestnet.blockExplorers.default.url}/tx/${data?.hash}`}>Hash</a></React.Fragment>)
+                  }
                 </div>
               </div>
             )}
