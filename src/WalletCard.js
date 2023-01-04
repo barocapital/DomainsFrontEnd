@@ -284,6 +284,7 @@ const WalletCard = ({ value }) => {
                   {visibleItem ? (
                     <>
                       <img
+                      alt="card media"
                         src={imagex}
                         style={{
                           width: "228px",
@@ -299,6 +300,22 @@ const WalletCard = ({ value }) => {
                 <CardContent sx={{ flexGrow: 1 }}></CardContent>
               </Grid>
             ))}
+            <div className="cards">
+              <div className="card">
+                <h1>Recarga $20</h1>
+                <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
+                <input type="tel" placeholder="Numero de telefono" />
+                <button>Transferir 20 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</button>
+              </div>
+              
+              <div className="card">
+                <h1>Recarga $100</h1>
+                <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
+                
+                <input name="telefono" type="tel" placeholder="Numero de telefono" />
+                <button>Transferir 100 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</button>
+              </div>
+            </div>
           </Container>
         </React.Fragment>
       </div>
