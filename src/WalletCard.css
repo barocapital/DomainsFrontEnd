@@ -1,9 +1,6 @@
-.walletCard {
-  margin: 1rem;
-  border: 1px solid rgb(233, 230, 230);
-  border-radius: 5px;
+.body {
+  overflow-x: 0;
 }
-
 .buttonWallet {
   background-color: #4caf50;
   border: none;
@@ -17,10 +14,10 @@
   cursor: pointer;
 }
 
-input {
+Input {
   border: 3px solid #000c11;
 }
-input:invalid {
+Input:invalid {
   border-color: #dd2c00;
 }
 
@@ -38,4 +35,18 @@ input:invalid {
 }
 #notify.error {
   background-color: #dd2c00;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  margin: 0;
+}
+
+.card {
+  /* border: 1px solid grey; */
+  /* border-radius: 1rem; */
+  /* padding: 1rem; */
+  margin: 1rem;
 }
