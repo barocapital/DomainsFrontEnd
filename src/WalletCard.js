@@ -88,12 +88,12 @@ const WalletCard = ({ value }) => {
     error: prepareError,
     isPrepareError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0xF9FB1B27314Fa5bA136C765bE2439C9513aEf13C",
+    address: process.env.REACT_APP_MAINNET_ADDRESS,
     abi: ABI,
     functionName: "register",
     enabled: theFlag,
     args: [userDomin.replace(".baro", ""), metadataX],
-    chainId: polygonTestnet.id,
+    chainId: polygonMainnet.id,
     onSuccess(data) {
       console.log("Success", data);
     },
@@ -270,7 +270,7 @@ const WalletCard = ({ value }) => {
                  {
 
                   data?.hash &&(
-                  <React.Fragment> <br></br><a target="_blank" href={`${polygonTestnet.blockExplorers.default.url}/tx/${data?.hash}`}>Hash</a></React.Fragment>)
+                  <React.Fragment> <br></br><a target="_blank" href={`${polygonMainnet.blockExplorers.default.url}/tx/${data?.hash}`}>Hash</a></React.Fragment>)
                   }
                 </div>
               </div>

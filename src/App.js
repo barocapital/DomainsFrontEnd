@@ -21,11 +21,11 @@ import { WagmiConfig } from "wagmi";
 import { polygonMainnet, polygonTestnet } from "./methods/Chains.jsx";
 
 const { chains, provider } = configureChains(
-  [polygonTestnet],
+  [ polygonMainnet],
   [
     jsonRpcProvider({
       rpc: (chain) => {
-        if (chain.id !== polygonTestnet.id) return null;
+        if (chain.id !==  polygonMainnet.id) return null;
         console.log(chain.id);
         return { http: chain.rpcUrls.default };
       },
