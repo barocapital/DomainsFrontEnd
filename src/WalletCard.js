@@ -300,21 +300,7 @@ const WalletCard = ({ value }) => {
                 <CardContent sx={{ flexGrow: 1 }}></CardContent>
               </Grid>
             ))}
-            <div className="cards">
-              <div className="card">
-                <h1>Recarga $20</h1>
-                <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
-                <div>
-                  <label for="phone">Ingresa tu número telefónico (sólo números):</label>
-                </div>
-                  <input name="teléfono" type="tel" placeholder="Numero de teléfono" id="phone" size="13" maxlength="10" minlength="10"/>
-                <div>
-                  <font size="2">
-                    <label>Transferir 20 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</label>
-                  </font>
-                </div>
-              </div>
-              
+            <div className="cards">             
               <div className="card">
                 <h1>Recarga $50</h1>
                 <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
