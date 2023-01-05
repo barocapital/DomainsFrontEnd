@@ -26,9 +26,9 @@ import {
   ChainDoesNotSupportMulticallError,
 } from "wagmi";
 import { polygonMainnet, polygonTestnet } from "./methods/Chains.jsx";
-import firebase from 'firebase/compat/app'; 
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';  
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
 var connected = false;
 
 const WalletCard = ({ value }) => {
@@ -45,6 +45,10 @@ const WalletCard = ({ value }) => {
   const [userDomin, setUserDomin] = useState("");
   const [enableProcess, setEnableProcess] = useState(0);
   const { address, isConnected } = useAccount();
+
+  const telRef = useRef("");
+  const telRef2 = useRef("");
+
   async function mint() {
     let imageDentro;
     let canvasBackground = background(userDomin);
@@ -55,8 +59,8 @@ const WalletCard = ({ value }) => {
         image: new File(
           [blob],
           userDomin +
-          process.env.REACT_APP_TLD.toString().replace(".", "") +
-          ".jpg",
+            process.env.REACT_APP_TLD.toString().replace(".", "") +
+            ".jpg",
           {
             type: "image/jpg",
           }
@@ -82,21 +86,23 @@ const WalletCard = ({ value }) => {
   const theFlag = useMemo(() => {
     return userDomin !== "" && metadataX !== "";
   }, [userDomin, metadataX]);
+
   async function readDatabase() {
     const db = firebase.firestore();
-    db.collection("transactions").add({
-      email: "Tokyo",
-      transactionHash: "Japan"
-  })
-  .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-  })
-  .catch(function(error) {
-      console.error("Error adding document: ", error);
-  });
-}
+    db.collection("transactions")
+      .add({
+        phone: telRef.current.value,
+        phone2: telRef2.current.value,
+        transactionHash: "",
+      })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  }
 
-  
   const {
     config,
     data: datax,
@@ -131,14 +137,13 @@ const WalletCard = ({ value }) => {
 
   useEffect(() => {
     if (enableProcess == 2) {
-      console.log("--");
+      console.log("x--x");
       write?.();
     }
   }, [enableProcess]);
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    readDatabase();
     async function fetchDefaultAccount() {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -173,17 +178,17 @@ const WalletCard = ({ value }) => {
         alert("El nombre del dominio no puede quedar vacío.");
       } else {
         if (!strongRegex.test(userDomin)) {
-          alert("El nombre del dominio contiene caracteres no válidos. Utilice sólo Letras y Números.");
+          alert(
+            "El nombre del dominio contiene caracteres no válidos. Utilice sólo Letras y Números."
+          );
         } else {
           if (userDomin.length <= 20) {
-            if ((/[a-zA-Z]/g).test(userDomin)) {
+            if (/[a-zA-Z]/g.test(userDomin)) {
               setEnableProcess(0);
               mint();
-            }
-            else
+            } else
               alert("El nombre del dominio debe contener al menos una letra.");
-          }
-          else {
+          } else {
             alert("No puede ser mas de 20 caracteres");
           }
         }
@@ -284,11 +289,18 @@ const WalletCard = ({ value }) => {
               <div>
                 ¡Has obtenido con éxito tu NFT!
                 <div>
-                 {
-
-                  data?.hash &&(
-                  <React.Fragment> <br></br><a target="_blank" href={`${polygonMainnet.blockExplorers.default.url}/tx/${data?.hash}`}>Hash</a></React.Fragment>)
-                  }
+                  {data?.hash && (
+                    <React.Fragment>
+                      {" "}
+                      <br></br>
+                      <a
+                        target="_blank"
+                        href={`${polygonMainnet.blockExplorers.default.url}/tx/${data?.hash}`}
+                      >
+                        Comprobante de transacción
+                      </a>
+                    </React.Fragment>
+                  )}
                 </div>
               </div>
             )}
@@ -301,7 +313,7 @@ const WalletCard = ({ value }) => {
                   {visibleItem ? (
                     <>
                       <img
-                      alt="card media"
+                        alt="card media"
                         src={imagex}
                         style={{
                           width: "228px",
@@ -320,17 +332,39 @@ const WalletCard = ({ value }) => {
             <div className="cards">
               <div className="card">
                 <h1>Recarga $20</h1>
-                <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
-                <input type="tel" placeholder="Numero de telefono" />
-                <button>Transferir 20 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</button>
+                <img
+                  src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg"
+                  alt="image description"
+                />
+                <input
+                  type="text"
+                  id="phone"
+                  ref={telRef}
+                  placeholder="Numero de telefono"
+                />
+                <button onClick={readDatabase}>
+                  Transferir 20 $BARO a
+                  0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E
+                </button>
               </div>
-              
+
               <div className="card">
                 <h1>Recarga $100</h1>
-                <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
-                
-                <input name="telefono" type="tel" placeholder="Numero de telefono" />
-                <button>Transferir 100 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</button>
+                <img
+                  src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg"
+                  alt="image description"
+                />
+
+                <input
+                  type="text"
+                  id="phone2"
+                  ref={telRef2}
+                  placeholder="Numero de telefono"
+                />
+                <button onClick={readDatabase}>
+                  Transferir 100 $BARO a
+                  0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E
+                </button>
               </div>
             </div>
           </Container>
