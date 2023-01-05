@@ -9,7 +9,6 @@ import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
-
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { ethers, getDefaultAccount } from "ethers";
 import "./WalletCard.css";
@@ -27,6 +26,9 @@ import {
   ChainDoesNotSupportMulticallError,
 } from "wagmi";
 import { polygonMainnet, polygonTestnet } from "./methods/Chains.jsx";
+import firebase from 'firebase/compat/app'; 
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';  
 var connected = false;
 
 const WalletCard = ({ value }) => {
@@ -80,7 +82,21 @@ const WalletCard = ({ value }) => {
   const theFlag = useMemo(() => {
     return userDomin !== "" && metadataX !== "";
   }, [userDomin, metadataX]);
+  async function readDatabase() {
+    const db = firebase.firestore();
+    db.collection("transactions").add({
+      email: "Tokyo",
+      transactionHash: "Japan"
+  })
+  .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch(function(error) {
+      console.error("Error adding document: ", error);
+  });
+}
 
+  
   const {
     config,
     data: datax,
@@ -122,6 +138,7 @@ const WalletCard = ({ value }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    readDatabase();
     async function fetchDefaultAccount() {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
