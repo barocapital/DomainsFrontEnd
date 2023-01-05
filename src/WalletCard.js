@@ -312,8 +312,10 @@ const WalletCard = ({ value }) => {
                 <h1>Recarga $100</h1>
                 <img src="https://media.discordapp.net/attachments/1010616157696430123/1060053189711376515/RecargaAmigoTelcel.jpg" alt="image description" />
                 
-                <input name="telefono" type="tel" placeholder="Numero de telefono" />
-                <button>Transferir 100 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</button>
+                <label for="phone">Ingresa tu número telefónico:</label>
+                <input name="teléfono" type="tel" placeholder="Numero de teléfono" id="phone" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}"
+       required/>
+                <h1>Transferir 100 $BARO a 0xADe4BEa7db7e35a5bE2CC9c528169Cb6cF2f4b6E</h1>
               </div>
             </div>
           </Container>
