@@ -7,6 +7,7 @@ import {
 } from "wagmi";
 import Navbar from "./Navbar";
 import WalletCard from "./WalletCard";
+import Marketplace from "./Marketplace";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
@@ -39,6 +40,7 @@ export function Profile() {
               <React.Fragment>
                 <center>
                   <WalletCard />
+                  <Marketplace/>
                 </center>
               </React.Fragment>
             ) : (

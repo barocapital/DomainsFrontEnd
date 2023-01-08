@@ -37,16 +37,3 @@ Input:invalid {
   background-color: #dd2c00;
 }
 
-.cards {
-  display: flex;
-  flex-direction: row;
-  max-width: 100%;
-  margin: 0;
-}
-
-.card {
-  /* border: 1px solid grey; */
-  /* border-radius: 1rem; */
-  /* padding: 1rem; */
-  margin: 1rem;
-}
