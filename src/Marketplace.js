@@ -43,22 +43,17 @@ const Marketplace = ({ value }) => {
       { value:"",
       price:"50000000000000000000",
       text:"Recarga de $50 pesos",
-      image:"https://www.telcel.com/content/dam/htmls/img/icons/logo-telcel.svg",
-      phone: ''
+      image:"https://www.telcel.com/content/dam/htmls/img/icons/logo-telcel.svg"
      }, 
-    { value: "",price:"100000000000000000000",text:"Recarga de $100 pesos",image:"https://www.telcel.com/content/dam/htmls/img/icons/logo-telcel.svg", phone: ''  },
+    { value: "",price:"100000000000000000000",text:"Recarga de $100 pesos",image:"https://www.telcel.com/content/dam/htmls/img/icons/logo-telcel.svg"  },
   ]);
 
   const handleChange = (e, index) => {
     const values = [...textBoxes];
-    if (e.target.name === 'phone') {
-      const formattedPhone = formatter(e.target.value);
-      values[index][e.target.name] = formattedPhone;
-    } else {
-      values[index][e.target.name] = e.target.value;
-    }
+    values[index].value = e.target.value;
     setTextBoxes(values);
   };
+
   async function sendBaros(){
     setActivateERC20(1);
   }
@@ -125,11 +120,7 @@ const Marketplace = ({ value }) => {
         });
     }
   }, [isSuccessERC20]);
-  const formatter = (phone) => {
-    const formattedPhone = phone.replace(/[^\d]/g, '').substring(0, 10);
-    return formattedPhone.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, "$1-$2-$3-$4-$5");
-  };
-  
+
   return (
     <Box
       sx={{
@@ -166,15 +157,18 @@ const Marketplace = ({ value }) => {
                                     {textBox.text}
                                     </Typography>
                                     <OutlinedInput
-            inputProps={{ pattern: '[0-9]*' }}
-            type="tel"
-            name="phone"
-            value={textBox.phone}
-            onChange={(e) => handleChange(e, index)}
-            InputLabelProps={{
-              formatter,
-            }}
-          />
+                                    margin="dense"
+                                    type="tel" 
+                                    id="phone" 
+                                    size="13"
+                                    pattern="[0-9]{1,10}"
+                                    value={textBox.value}
+                                    placeholder="Teléfono" onChange={e => handleChange(e, index)}
+                                    aria-describedby="outlined-weight-helper-text"
+                                    inputProps={{
+                                        "aria-label": "weight",
+                                    }}
+                                    />
                                     <br></br>
                                     <br></br>
                                     <center>
@@ -183,12 +177,18 @@ const Marketplace = ({ value }) => {
                                         color="success"
                                         className="buttonWallet"
                                         onClick={(e) => {
-                                        e.preventDefault()
-                                        setActivateERC20(0);
-                                        setPrice(textBox.price);
-                                        setActualIndex(index);
-                                        sendBaros();
-                                        
+
+
+                                        const isNumber = /^\d+$/.test(textBox.value); // Check if price is a number
+                                        if (isNumber) { // If price is a number, set activateERC20 to 1
+                                            e.preventDefault()
+                                            setActivateERC20(0);
+                                            setPrice(textBox.price);
+                                            setActualIndex(index);
+                                            sendBaros();
+                                        } else { // If price is not a number, display an error message
+                                          alert("Télefono con formato incorrecto");
+                                        }
                                         }}
                                     >
                                         {textBox.text}
